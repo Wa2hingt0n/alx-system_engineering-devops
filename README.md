@@ -52,7 +52,7 @@
    - What an alias is
    - When to use the command help instead of 'man'
 
-## Shell Permissions
+## Project 0x01-Shell Permissions
 
   The purpose of this project was to help the learner identify the various permission levels for various user groups and how to change and manipulate them.
 
