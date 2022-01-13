@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# This script displays a string 10 times but displays "Hi" before the last
+# iteration
+
+string="Hi"
+i="0"
+
+while [ $i -lt 10 ]
+do
+    if [ $i -eq 9 ]
+    then
+	echo "$string"
+    fi
+    echo "Best School"
+    i=$((i + 1))
+
+done
