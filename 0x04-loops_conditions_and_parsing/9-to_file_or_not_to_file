@@ -19,6 +19,6 @@ then
     fi
 
 else
-    echo "school does not exist"
+    echo "school file does not exist"
 
 fi
