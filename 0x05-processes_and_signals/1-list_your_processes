@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# This script displays all running processes for all users
+
+ps -aux
