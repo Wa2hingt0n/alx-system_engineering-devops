@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Redirects '/redirect_me' to another page using a 301 redirection
+
+apt-get update
+apt-get -y install nginx
+echo "Hello World!" > /var/www/html/index.html
+new_string=".rules\n\t\trewrite ^\/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;\n"
+sed -i "s/.rules/$new_string/" /etc/nginx/sites-available/default
+service nginx restart
