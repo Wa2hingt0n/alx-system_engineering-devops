@@ -12,6 +12,7 @@ apt-get install -y haproxy=2.5.\*
 echo "ENABLED=1" >> /etc/default/haproxy
 
 # configuring HAProxy
+mv /etc/haproxy/haproxy.cfg{,.original}
 printf %s "
 frontend http_front
         bind *:80
@@ -22,6 +23,6 @@ backend http_back
         balance roundrobin
         server 1667-web-01 34.204.166.82:80 check
         server 1667-web-02 44.200.178.195:80 check
-" >> /etc/haproxy/haproxy.cfg
+" > /etc/haproxy/haproxy.cfg
 
 service haproxy start
