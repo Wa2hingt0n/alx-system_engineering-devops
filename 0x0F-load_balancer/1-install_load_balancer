@@ -9,40 +9,19 @@ apt-get update
 apt-get install -y haproxy=2.5.\*
 
 # Enabling HAProxy to be started by the init script
-echo "ENABLED=1" > /etc/default/haproxy
+echo "ENABLED=1" >> /etc/default/haproxy
 
 # configuring HAProxy
-mv /etc/haproxy/haproxy.cfg{,.original}
-touch /etc/haproxy/haproxy.cfg
-
 printf %s "
-global
-    log 127.0.0.1 local0 notice
-    maxconn 2000
-    user haproxy
-    group haproxy
+frontend http_front
+        bind *:80
+        stats uri /haproxy?stats
+        default_backend http_back
 
-defaults
-    log     global
-    mode    http
-    option  httplog
-    option  dontlognull
-    retries 3
-    option redispatch
-    timeout connect  5000
-    timeout client  10000
-    timeout server  10000
+backend http_back
+        balance roundrobin
+        server 1667-web-01 34.204.166.82:80 check
+        server 1667-web-02 44.200.178.195:80 check
+" >> /etc/haproxy/haproxy.cfg
 
-listen appname
-    bind 0.0.0.0:80
-    mode http
-    stats enable
-    stats uri /haproxy?stats
-    balance roundrobin
-    option httpclose
-    option forwardfor
-    server 1667-web-01 34.204.166.82:80 check
-    server 1667-web-02 44.200.178.195:80 check
-" > /etc/haproxy/haproxy.cfg
-
-service haproxy restart
+service haproxy start
