@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Installs 'nginx' on my server, that listens to port 80
+# Querying 'nginx' with a GET request at its root should return a page that
+# contains the string 'Hello World!'
+
+apt-get update
+apt-get -y install nginx
+touch /var/www/html/index.html
+echo "Hello World!" > /var/www/html/index.html
+service nginx start
