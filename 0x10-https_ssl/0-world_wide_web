@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Displays information about subdomains
+# Takes two arguments, a mandatory domain-name and optional sub-domain name.
+
+if [ $# -eq 1 ]
+     then
+     for sd in www lb-01 web-01 web-02; do
+     	 rec_type="$(dig "$sd"."$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $4}')"
+       	 ip="$(dig "$sd"."$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')"
+       	 echo "The subdomain $sd is a $rec_type record and points to $ip"
+     done
+elif [ $# -eg 2 ]
+     then
+     rec_type="$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $4}')"
+     ip="$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')"
+     echo "The subdomain $2 ia a $rec_type record and points to $ip"
+fi
