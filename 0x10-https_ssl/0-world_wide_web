@@ -13,5 +13,5 @@ elif [ $# -eq 2 ]
      then
      rec_type="$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $4}')"
      ip="$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:' | tail -1 | awk '{print $5}')"
-     echo "The subdomain $2 ia a $rec_type record and points to $ip"
+     echo "The subdomain $2 is a $rec_type record and points to $ip"
 fi
