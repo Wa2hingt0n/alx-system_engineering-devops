@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Defines the function 'number_of_subscribers' that queries the reddit.com """
+"""Defines the function 'number_of_subscribers' that queries the reddit.com """
 import requests
 
 
