@@ -1,10 +1,14 @@
 # Nginx configuration file to serve a webpage from the route /airbnb-onepage/
 server {
-    listen 80;
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+    
     server_name 34.204.166.82;
 
     location /airbnb-onepage/ {
         include proxy_params;
 	proxy_pass http://127.0.0.1:5000;
     }
+
+    add_header X-Serverd-By 1667-web-01;
 }
